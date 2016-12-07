@@ -48,7 +48,7 @@ public class BlockGenerator : MonoBehaviour {
 		for (int x = chunk.getStartX(); x < chunk.getEndX(); x++) {
 			for (int y = chunk.getStartY(); y < chunk.getEndY(); y++) {
 				for (int z = chunk.getStartZ(); z < chunk.getEndZ(); z++) {
-					renderBlock(vertices, triangles, chunk, x, y, z);
+					renderBlock(vertices, triangles, chunk, new WorldPos(x, y, z));
 				}
 			}
 		}
@@ -81,12 +81,16 @@ public class BlockGenerator : MonoBehaviour {
 		}
 	}
 
-	public void renderBlock(List<Vector3> vertices, List<int> triangles, Chunk chunk, int x, int y, int z) {
-		Block block = Chunk.attainBlock(BlockType.AIR, new WorldPos(x, y, z));
+	public void renderBlock(List<Vector3> vertices, List<int> triangles, Chunk chunk, WorldPos pos) {
+		Block block = Chunk.attainBlock(BlockType.AIR, pos);
 		if (!block.isVisible()) {
 			return;
 		}
-	
+		
+		int x = pos.x;
+		int y = pos.y;
+		int z = pos.z;
+		
 		int vertexIndex;
 		
 		if (renderFace(BlockFace.TOP, chunk, block)) { // Top
