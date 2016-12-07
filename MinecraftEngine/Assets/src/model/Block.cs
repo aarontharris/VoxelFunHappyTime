@@ -3,31 +3,31 @@ using System;
 
 public struct Block {
 
-	public static Block newInst(BlockType type, int x, int y, int z) {
+	public static Block newInst(BlockType type, WorldPos pos) {
 		Block block = new Block();
 		block.type = type;
-		block.x = x;
-		block.y = y;
-		block.z = z;
+		block.pos = pos;
 		return block;
 	}
 
 	private BlockType type;
 	
-	private int x;
-	private int y;
-	private int z;
+	private WorldPos pos;
+
+	public WorldPos getPosition() {
+		return pos;
+	}
 
 	public int getX() {
-		return x;
+		return pos.x;
 	}
 
 	public int getY() {
-		return y;
+		return pos.y;
 	}
 
 	public int getZ() {
-		return z;
+		return pos.z;
 	}
 
 	public bool isVisible() {

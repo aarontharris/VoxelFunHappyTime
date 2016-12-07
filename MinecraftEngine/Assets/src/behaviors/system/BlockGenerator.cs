@@ -11,18 +11,19 @@ public class BlockGenerator : MonoBehaviour {
 
 	void Start() {
 		world = World.get();
-		Chunk chunk = world.attainChunk(0, 0, 0);
+		Chunk chunk = world.attainChunk(new WorldPos(0, 0, 0));
 		
 		UnityEngine.Random.InitState(12345);	
 		
 		for (int x = chunk.getStartX(); x < chunk.getEndX(); x++) {
 			for (int y = chunk.getStartY(); y < chunk.getEndY(); y++) {
 				for (int z = chunk.getStartZ(); z < chunk.getEndZ(); z++) {
+					WorldPos pos = new WorldPos(x, y, z);
 					int r = UnityEngine.Random.Range(0, 9);
 					if (r > 5) {
-						world.attainChunk(x, y, z).putBlock(Block.newInst(BlockType.AIR, x, y, z), x, y, z);
+						Chunk.attainBlock(BlockType.AIR, pos);
 					} else {
-						world.attainChunk(x, y, z).putBlock(Block.newInst(BlockType.GRANITE, x, y, z), x, y, z);
+						Chunk.attainBlock(BlockType.GRANITE, pos);
 					}
 				}
 			}
@@ -31,14 +32,18 @@ public class BlockGenerator : MonoBehaviour {
 
 	public void doGenerateNextSet() {
 		Debug.Log("doGenerateNextSet");
-		generateChunkMesh(0, 0, 0);
+		try {
+			generateChunkMesh(0, 0, 0);
+		} catch (Exception e) {
+			Debug.LogError(e);
+		}
 	}
 
 	private void generateChunkMesh(int xChunk, int yChunk, int zChunk) {		
 		List<Vector3> vertices = new List<Vector3>();
 		List<int> triangles = new List<int>();
 		
-		Chunk chunk = World.get().attainChunk(xChunk, yChunk, zChunk);
+		Chunk chunk = World.get().attainChunk(new WorldPos(xChunk, yChunk, zChunk));
 		
 		for (int x = chunk.getStartX(); x < chunk.getEndX(); x++) {
 			for (int y = chunk.getStartY(); y < chunk.getEndY(); y++) {
@@ -62,23 +67,22 @@ public class BlockGenerator : MonoBehaviour {
 
 	public Block getAdjacentBlock(BlockFace blockFace, Chunk chunk, Block block) {
 		if (blockFace.isTop()) {
-			return chunk.attainBlock(block.getX(), block.getY() + 1, block.getZ());
+			return Chunk.attainBlock(new WorldPos(block.getX(), block.getY() + 1, block.getZ()));
 		} else if (blockFace.isBottom()) {
-			return chunk.attainBlock(block.getX(), block.getY() - 1, block.getZ());
+			return Chunk.attainBlock(new WorldPos(block.getX(), block.getY() - 1, block.getZ()));
 		} else if (blockFace.isFront()) {
-			return chunk.attainBlock(block.getX(), block.getY(), block.getZ() + 1);
+			return Chunk.attainBlock(new WorldPos(block.getX(), block.getY(), block.getZ() + 1));
 		} else if (blockFace.isBack()) {
-			return chunk.attainBlock(block.getX(), block.getY(), block.getZ() - 1);
+			return Chunk.attainBlock(new WorldPos(block.getX(), block.getY(), block.getZ() - 1));
 		} else if (blockFace.isLeft()) {
-			return chunk.attainBlock(block.getX() - 1, block.getY(), block.getZ());
+			return Chunk.attainBlock(new WorldPos(block.getX() - 1, block.getY(), block.getZ()));
 		} else { // if (blockFace.isRight()) {
-			return chunk.attainBlock(block.getX() + 1, block.getY(), block.getZ());
+			return Chunk.attainBlock(new WorldPos(block.getX() + 1, block.getY(), block.getZ()));
 		}
 	}
 
 	public void renderBlock(List<Vector3> vertices, List<int> triangles, Chunk chunk, int x, int y, int z) {
-		Block block = chunk.getBlock(x, y, z);
-		
+		Block block = Chunk.attainBlock(BlockType.AIR, new WorldPos(x, y, z));
 		if (!block.isVisible()) {
 			return;
 		}

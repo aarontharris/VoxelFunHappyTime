@@ -20,44 +20,33 @@ public struct World {
 
 	private Dictionary<int, Dictionary<int,Dictionary<int, Chunk>>> chunksMap;
 
-	public Chunk attainChunk(int x, int y, int z) {
-		int xChunk = x / Chunk.CHUNK_SIZE_X;
-		int yChunk = y / Chunk.CHUNK_SIZE_Y;
-		int zChunk = z / Chunk.CHUNK_SIZE_Z;
-		if (x < 0) {
-			xChunk -= 1;
-		}
-		if (y < 0) {
-			yChunk -= 1;
-		}
-		if (z < 0) {
-			zChunk -= 1;
-		}
+	public Chunk attainChunk(WorldPos worldPos) {
+		ChunkPos pos = new ChunkPos(worldPos);
 		
 		Dictionary<int, Dictionary<int,Dictionary<int, Chunk>>> xyzChunks = chunksMap;
 		Dictionary<int,Dictionary<int, Chunk>> yzChunks;
 		Dictionary<int, Chunk> zChunks;
 		Chunk chunk = default(Chunk);
 		
-		if (!xyzChunks.ContainsKey(xChunk)) {
+		if (!xyzChunks.ContainsKey(pos.x)) {
 			yzChunks = new Dictionary<int, Dictionary<int, Chunk>>();
-			xyzChunks.Add(xChunk, yzChunks);
+			xyzChunks.Add(pos.x, yzChunks);
 		} else {
-			yzChunks = xyzChunks[xChunk];
+			yzChunks = xyzChunks[pos.x];
 		}
 		
-		if (!yzChunks.ContainsKey(yChunk)) {
+		if (!yzChunks.ContainsKey(pos.y)) {
 			zChunks = new Dictionary<int, Chunk>();
-			yzChunks.Add(yChunk, zChunks);
+			yzChunks.Add(pos.y, zChunks);
 		} else {
-			zChunks = yzChunks[yChunk];
+			zChunks = yzChunks[pos.y];
 		}
 		
-		if (!zChunks.ContainsKey(zChunk)) {
-			chunk = Chunk.newInst(xChunk, yChunk, zChunk);
-			zChunks.Add(zChunk, chunk);
+		if (!zChunks.ContainsKey(pos.z)) {
+			chunk = Chunk.newInst(pos);
+			zChunks.Add(pos.z, chunk);
 		} else {
-			chunk = zChunks[zChunk];
+			chunk = zChunks[pos.z];
 		}
 		
 		return chunk;

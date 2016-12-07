@@ -45,6 +45,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\src\Test.cs" />
      <Compile Include="Assets\src\behaviors\model\MBBlock.cs" />
      <Compile Include="Assets\src\behaviors\model\MBItem.cs" />
      <Compile Include="Assets\src\behaviors\model\MBTool.cs" />
@@ -55,9 +56,11 @@
      <Compile Include="Assets\src\model\BlockFace.cs" />
      <Compile Include="Assets\src\model\BlockType.cs" />
      <Compile Include="Assets\src\model\Chunk.cs" />
+     <Compile Include="Assets\src\model\ChunkPos.cs" />
      <Compile Include="Assets\src\model\Item.cs" />
      <Compile Include="Assets\src\model\Tool.cs" />
      <Compile Include="Assets\src\model\World.cs" />
+     <Compile Include="Assets\src\model\WorldPos.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>/Applications/Unity/Unity.app/Contents/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

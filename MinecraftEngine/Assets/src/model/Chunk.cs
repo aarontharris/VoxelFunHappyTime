@@ -1,83 +1,87 @@
-﻿public struct Chunk {
+﻿using System;
+using UnityEngine;
+
+
+public struct Chunk {
 
 	public static readonly byte CHUNK_SIZE_X = 16;
 	public static readonly byte CHUNK_SIZE_Y = 16;
 	public static readonly byte CHUNK_SIZE_Z = 16;
 
-	public static Block lookupBlock(int x, int y, int z) {
-		Chunk chunk = World.get().attainChunk(x, y, z);
-		return chunk.attainBlock(x, y, z);
-	}
-
-	public static Chunk newInst(int x, int y, int z) {
+	public static Chunk newInst(ChunkPos pos) {
 		Chunk chunk = new Chunk();
 		chunk.blocks = new Block[CHUNK_SIZE_X, CHUNK_SIZE_Y, CHUNK_SIZE_Z];
-		chunk.x = x;
-		chunk.y = y;
-		chunk.z = z;
+		chunk.pos = pos;
 		return chunk;
 	}
 
-	private int x;
-	private int y;
-	private int z;
-	
-	public Block[,,] blocks;
-
-	public int getStartX() {
-		return x;
+	public static Block attainBlock(WorldPos pos) {
+		return Chunk.attainBlock(BlockType.AIR, pos);
 	}
 
-	public int getEndX() {
-		return x + CHUNK_SIZE_X;
-	}
-
-	public int getStartY() {
-		return y;
-	}
-
-	public int getEndY() {
-		return y + CHUNK_SIZE_Y;
-	}
-
-	public int getStartZ() {
-		return z;
-	}
-
-	public int getEndZ() {
-		return z + CHUNK_SIZE_Z;
-	}
-
-	// Null when block is not present
-	public Block getBlock(int x, int y, int z) {
-		if (isInside(x, y, z)) {
-			Block block = blocks[x, y, z];
-			return block;
-		}
-		return Chunk.lookupBlock(x, y, z); // potential infinite loop, but "shouldn't" happen unless XYZ is F'd
-	}
-
-	public Block attainBlock(int x, int y, int z) {
-		return attainBlock(BlockType.AIR, x, y, z);
-	}
-
-	public Block attainBlock(BlockType type, int x, int y, int z) {
-		Block block = getBlock(x, y, z);
+	public static Block attainBlock(BlockType type, WorldPos pos) {
+		Chunk chunk = World.get().attainChunk(pos);
+		Block block = chunk.getBlock(pos);
 		if (block.Equals(default(Block))) {
-			block = Block.newInst(type, x, y, z);
-			putBlock(block, x, y, z);
+			block = Block.newInst(type, pos);
+			chunk.putBlock(block, pos);
 		}	
 		return block;
 	}
 
-	public void putBlock(Block block, int x, int y, int z) {
-		blocks[x, y, z] = block;
+	// Nullable
+	public static Block lookupBlock(WorldPos pos) {
+		Chunk chunk = World.get().attainChunk(pos);
+		Block block = chunk.getBlock(pos);
+		return block;
 	}
 
-	public bool isInside(int x, int y, int z) {
-		if (x >= this.x && x < this.x + CHUNK_SIZE_X &&
-		    y >= this.y && y < this.y + CHUNK_SIZE_Y &&
-		    z >= this.z && z < this.z + CHUNK_SIZE_Z) {
+	private ChunkPos pos;
+
+	public ChunkPos getPos() {
+		return pos;
+	}
+
+	public int getStartX() {
+		return pos.x;
+	}
+
+	public int getEndX() {
+		return pos.x + CHUNK_SIZE_X;
+	}
+
+	public int getStartY() {
+		return pos.y;
+	}
+
+	public int getEndY() {
+		return pos.y + CHUNK_SIZE_Y;
+	}
+
+	public int getStartZ() {
+		return pos.z;
+	}
+
+	public int getEndZ() {
+		return pos.z + CHUNK_SIZE_Z;
+	}
+
+	public Block[,,] blocks;
+
+	// Null when block is not present
+	private Block getBlock(WorldPos pos) {
+		Block block = blocks[pos.x - getPos().x, pos.y - getPos().y, pos.z - getPos().z];
+		return block;
+	}
+
+	private void putBlock(Block block, WorldPos pos) {
+		blocks[pos.x - getPos().x, pos.y - getPos().y, pos.z - getPos().z] = block;
+	}
+
+	public bool isInside(WorldPos pos) {
+		if (pos.x >= getStartX() && pos.x < getEndX() &&
+		    pos.y >= getStartY() && pos.y < getEndY() &&
+		    pos.z >= getStartZ() && pos.z < getEndZ()) {
 			return true;
 		}
 		return false;
