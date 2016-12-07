@@ -28,22 +28,46 @@ public class BlockGenerator : MonoBehaviour {
 				}
 			}
 		}
+		
+		Chunk.attainBlock(BlockType.GRANITE, new WorldPos(0, 0, 0));
+		Chunk.attainBlock(BlockType.GRANITE, new WorldPos(2, 0, 0));
+		Chunk.attainBlock(BlockType.GRANITE, new WorldPos(4, 0, 0));
+		Chunk.attainBlock(BlockType.GRANITE, new WorldPos(6, 0, 0));
+		Chunk.attainBlock(BlockType.GRANITE, new WorldPos(8, 0, 0));
+		Chunk.attainBlock(BlockType.GRANITE, new WorldPos(10, 0, 0));
+		Chunk.attainBlock(BlockType.GRANITE, new WorldPos(12, 0, 0));
+		Chunk.attainBlock(BlockType.GRANITE, new WorldPos(14, 0, 0));
+		Chunk.attainBlock(BlockType.GRANITE, new WorldPos(16, 0, 0));
+		Chunk.attainBlock(BlockType.GRANITE, new WorldPos(16, 1, 0));
+		Chunk.attainBlock(BlockType.GRANITE, new WorldPos(18, 0, 0));
+		Chunk.attainBlock(BlockType.GRANITE, new WorldPos(20, 0, 0));
+		Chunk.attainBlock(BlockType.GRANITE, new WorldPos(22, 0, 0));
+		Chunk.attainBlock(BlockType.GRANITE, new WorldPos(24, 0, 0));
+		Chunk.attainBlock(BlockType.GRANITE, new WorldPos(26, 0, 0));
+		Chunk.attainBlock(BlockType.GRANITE, new WorldPos(28, 0, 0));
+		Chunk.attainBlock(BlockType.GRANITE, new WorldPos(30, 0, 0));
+		Chunk.attainBlock(BlockType.GRANITE, new WorldPos(32, 0, 0));
+		Chunk.attainBlock(BlockType.GRANITE, new WorldPos(32, 1, 0));
 	}
 
+	private int lastSet = -Chunk.CHUNK_SIZE_X;
+
 	public void doGenerateNextSet() {
-		Debug.Log("doGenerateNextSet");
 		try {
-			generateChunkMesh(0, 0, 0);
+			lastSet += Chunk.CHUNK_SIZE_X;
+			Debug.LogFormat("doGenerateNextSet {0}", lastSet);
+			generateChunkMesh(new WorldPos(lastSet, 0, 0));
 		} catch (Exception e) {
 			Debug.LogError(e);
 		}
 	}
 
-	private void generateChunkMesh(int xChunk, int yChunk, int zChunk) {		
+	private void generateChunkMesh(WorldPos pos) {
 		List<Vector3> vertices = new List<Vector3>();
 		List<int> triangles = new List<int>();
 		
-		Chunk chunk = World.get().attainChunk(new WorldPos(xChunk, yChunk, zChunk));
+		Chunk chunk = World.get().attainChunk(pos);
+		Debug.LogFormat("Generating Chunk {0}, {1}, {2}", chunk.getPos().x, chunk.getPos().y, chunk.getPos().z);
 		
 		for (int x = chunk.getStartX(); x < chunk.getEndX(); x++) {
 			for (int y = chunk.getStartY(); y < chunk.getEndY(); y++) {
