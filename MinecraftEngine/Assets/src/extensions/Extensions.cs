@@ -14,5 +14,11 @@ public static class Extensions {
 		position.z = z;
 		transform.position = position;
 	}
-	
+
+	public static void setXYZ(this Vector3 vector, float x, float y, float z) {
+		Vector3 rval = vector;
+		rval.x = x;
+		rval.y = y;
+		rval.z = z;
+	}
 }

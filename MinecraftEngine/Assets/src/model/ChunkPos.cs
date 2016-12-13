@@ -1,12 +1,5 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using System;
 
-// W-16 = C-16
-// W-15 = C -1
-// W -1 = C -1
-// W  0 = C  0
-// W 15 = C  0
-// W 16 = C 16
 public struct ChunkPos {
 	public int x;
 	public int y;
@@ -46,4 +39,7 @@ public struct ChunkPos {
 		
 	}
 
+	public override string ToString() {
+		return string.Format("{0},{1},{2}", x, y, z);
+	}
 }

@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-using System.Collections;
-
+﻿
 /// <summary>
 /// 1 unit is 1 unit
 /// </summary>
@@ -19,5 +17,9 @@ public struct WorldPos {
 		this.x = chunkPos.x;
 		this.y = chunkPos.y;
 		this.z = chunkPos.z;
+	}
+
+	public override string ToString() {
+		return string.Format("{0},{1},{2}", x, y, z);
 	}
 }

@@ -29,7 +29,18 @@ public class BlockGenerator : MonoBehaviour {
 			}
 		}
 		
-		Chunk.attainBlock(BlockType.GRANITE, new WorldPos(0, 0, 0));
+//		Chunk.attainBlock(BlockType.GRANITE, new WorldPos(-32, 1, 0));
+//		Chunk.attainBlock(BlockType.GRANITE, new WorldPos(-32, 0, 0));
+//		Chunk.attainBlock(BlockType.GRANITE, new WorldPos(-31, 0, 0));
+//		Chunk.attainBlock(BlockType.GRANITE, new WorldPos(-17, 0, 0));
+//		Chunk.attainBlock(BlockType.GRANITE, new WorldPos(-16, 1, 0));
+//		Chunk.attainBlock(BlockType.GRANITE, new WorldPos(-16, 0, 0));
+//		Chunk.attainBlock(BlockType.GRANITE, new WorldPos(-15, 0, 0));
+//		Chunk.attainBlock(BlockType.GRANITE, new WorldPos(-7, 0, 0));
+//		Chunk.attainBlock(BlockType.GRANITE, new WorldPos(-5, 0, 0));
+//		Chunk.attainBlock(BlockType.GRANITE, new WorldPos(-3, 0, 0));
+//		Chunk.attainBlock(BlockType.GRANITE, new WorldPos(-1, 0, 0));
+		Chunk.attainBlock(BlockType.GRANITE, new WorldPos(0, 1, 0));
 		Chunk.attainBlock(BlockType.GRANITE, new WorldPos(2, 0, 0));
 		Chunk.attainBlock(BlockType.GRANITE, new WorldPos(4, 0, 0));
 		Chunk.attainBlock(BlockType.GRANITE, new WorldPos(6, 0, 0));
@@ -48,6 +59,9 @@ public class BlockGenerator : MonoBehaviour {
 		Chunk.attainBlock(BlockType.GRANITE, new WorldPos(30, 0, 0));
 		Chunk.attainBlock(BlockType.GRANITE, new WorldPos(32, 0, 0));
 		Chunk.attainBlock(BlockType.GRANITE, new WorldPos(32, 1, 0));
+		
+		Chunk.attainBlock(BlockType.GRANITE, new WorldPos(48, 0, 0));
+		Chunk.attainBlock(BlockType.GRANITE, new WorldPos(48, 1, 0));
 	}
 
 	private int lastSet = -Chunk.CHUNK_SIZE_X;
@@ -79,6 +93,17 @@ public class BlockGenerator : MonoBehaviour {
 		
 		GameObject chunkGameObject = UnityEngine.Object.Instantiate(defaultMesh);
 		chunkGameObject.setPosition(chunk.getStartX(), chunk.getStartY(), chunk.getStartZ());
+		BoxCollider collider = chunkGameObject.GetComponent<BoxCollider>();
+		Vector3 center = collider.center;
+		center.x = Chunk.CHUNK_SIZE_X / 2;
+		center.y = Chunk.CHUNK_SIZE_Y / 2;
+		center.z = Chunk.CHUNK_SIZE_Z / 2;
+		collider.center = center;
+		Vector3 size = collider.size;
+		size.x = Chunk.CHUNK_SIZE_X;
+		size.y = Chunk.CHUNK_SIZE_Y;
+		size.z = Chunk.CHUNK_SIZE_Z;
+		collider.size = size;
 		
 		MeshFilter meshFilter = chunkGameObject.GetComponent<MeshFilter>();
 		Mesh mesh = new Mesh(); // meshFilter.mesh;
@@ -91,17 +116,17 @@ public class BlockGenerator : MonoBehaviour {
 
 	public Block getAdjacentBlock(BlockFace blockFace, Chunk chunk, Block block) {
 		if (blockFace.isTop()) {
-			return Chunk.attainBlock(new WorldPos(block.getX(), block.getY() + 1, block.getZ()));
+			return Chunk.attainBlock(new WorldPos(block.getWorldX(), block.getWorldY() + 1, block.getWorldZ()));
 		} else if (blockFace.isBottom()) {
-			return Chunk.attainBlock(new WorldPos(block.getX(), block.getY() - 1, block.getZ()));
+			return Chunk.attainBlock(new WorldPos(block.getWorldX(), block.getWorldY() - 1, block.getWorldZ()));
 		} else if (blockFace.isFront()) {
-			return Chunk.attainBlock(new WorldPos(block.getX(), block.getY(), block.getZ() + 1));
+			return Chunk.attainBlock(new WorldPos(block.getWorldX(), block.getWorldY(), block.getWorldZ() + 1));
 		} else if (blockFace.isBack()) {
-			return Chunk.attainBlock(new WorldPos(block.getX(), block.getY(), block.getZ() - 1));
+			return Chunk.attainBlock(new WorldPos(block.getWorldX(), block.getWorldY(), block.getWorldZ() - 1));
 		} else if (blockFace.isLeft()) {
-			return Chunk.attainBlock(new WorldPos(block.getX() - 1, block.getY(), block.getZ()));
+			return Chunk.attainBlock(new WorldPos(block.getWorldX() - 1, block.getWorldY(), block.getWorldZ()));
 		} else { // if (blockFace.isRight()) {
-			return Chunk.attainBlock(new WorldPos(block.getX() + 1, block.getY(), block.getZ()));
+			return Chunk.attainBlock(new WorldPos(block.getWorldX() + 1, block.getWorldY(), block.getWorldZ()));
 		}
 	}
 
@@ -111,9 +136,9 @@ public class BlockGenerator : MonoBehaviour {
 			return;
 		}
 		
-		int x = pos.x;
-		int y = pos.y;
-		int z = pos.z;
+		int x = pos.x - chunk.getStartX();
+		int y = pos.y - chunk.getStartY();
+		int z = pos.z - chunk.getStartZ();
 		
 		int vertexIndex;
 		
@@ -215,7 +240,6 @@ public class BlockGenerator : MonoBehaviour {
 	}
 
 	public bool renderFace(BlockFace blockFace, Chunk chunk, Block block) {
-
 		try { // don't skip faces touching non-visible blocks
 			Block adjacent = getAdjacentBlock(blockFace, chunk, block);
 			if (!adjacent.isVisible()) {
@@ -225,9 +249,9 @@ public class BlockGenerator : MonoBehaviour {
 			Debug.LogException(e);
 		}
 		
-		int x = block.getX();
-		int y = block.getY();
-		int z = block.getZ();
+		int x = block.getWorldX();
+		int y = block.getWorldY();
+		int z = block.getWorldZ();
 		
 
 		{ // ensure outside edges until we can lookup adjacent chunks // FIXME: lookup adjacent chunk

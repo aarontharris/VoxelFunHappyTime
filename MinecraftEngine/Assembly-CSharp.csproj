@@ -51,6 +51,7 @@
      <Compile Include="Assets\src\behaviors\model\MBTool.cs" />
      <Compile Include="Assets\src\behaviors\system\BlockGenerator.cs" />
      <Compile Include="Assets\src\behaviors\system\CanvasInputHandler.cs" />
+     <Compile Include="Assets\src\behaviors\system\Log.cs" />
      <Compile Include="Assets\src\extensions\Extensions.cs" />
      <Compile Include="Assets\src\model\Block.cs" />
      <Compile Include="Assets\src\model\BlockFace.cs" />

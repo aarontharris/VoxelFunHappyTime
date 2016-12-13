@@ -6,28 +6,29 @@ public struct Block {
 	public static Block newInst(BlockType type, WorldPos pos) {
 		Block block = new Block();
 		block.type = type;
-		block.pos = pos;
+		block.wpos = pos;
 		return block;
 	}
 
 	private BlockType type;
 	
-	private WorldPos pos;
+	private WorldPos wpos;
+	private ChunkPos cpos;
 
-	public WorldPos getPosition() {
-		return pos;
+	public WorldPos getWorldPosition() {
+		return wpos;
 	}
 
-	public int getX() {
-		return pos.x;
+	public int getWorldX() {
+		return wpos.x;
 	}
 
-	public int getY() {
-		return pos.y;
+	public int getWorldY() {
+		return wpos.y;
 	}
 
-	public int getZ() {
-		return pos.z;
+	public int getWorldZ() {
+		return wpos.z;
 	}
 
 	public bool isVisible() {
