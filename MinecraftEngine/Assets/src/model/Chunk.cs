@@ -23,7 +23,7 @@ public struct Chunk {
 		Chunk chunk = World.get().attainChunk(pos);
 		Block block = chunk.getBlock(pos);
 		if (block.Equals(default(Block))) {
-			block = Block.newInst(type, pos);
+			block = Block.newInst(type, chunk, pos);
 			chunk.putBlock(block, pos);
 		}	
 		return block;
@@ -70,12 +70,16 @@ public struct Chunk {
 
 	// Null when block is not present
 	private Block getBlock(WorldPos pos) {
-		Block block = blocks[pos.x - getPos().x, pos.y - getPos().y, pos.z - getPos().z];
+		BlockPos bpos = new BlockPos(pos);
+		Block block = blocks[bpos.x, bpos.y, bpos.z];
+		//Block block = blocks[pos.x - getPos().x, pos.y - getPos().y, pos.z - getPos().z];
 		return block;
 	}
 
 	private void putBlock(Block block, WorldPos pos) {
-		blocks[pos.x - getPos().x, pos.y - getPos().y, pos.z - getPos().z] = block;
+		BlockPos bpos = new BlockPos(pos);
+		//blocks[pos.x - getPos().x, pos.y - getPos().y, pos.z - getPos().z] = block;
+		blocks[bpos.x, bpos.y, bpos.z] = block;
 	}
 
 	public bool isInside(WorldPos pos) {

@@ -19,6 +19,12 @@ public struct WorldPos {
 		this.z = chunkPos.z;
 	}
 
+	public WorldPos(ChunkPos chunkPos, BlockPos blockPos) {
+		this.x = chunkPos.x + blockPos.x;
+		this.y = chunkPos.y + blockPos.y;
+		this.z = chunkPos.z + blockPos.z;
+	}
+
 	public override string ToString() {
 		return string.Format("{0},{1},{2}", x, y, z);
 	}

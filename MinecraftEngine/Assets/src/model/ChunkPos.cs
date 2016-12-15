@@ -1,5 +1,7 @@
 ﻿using System;
 
+// A Chunk's position in World Space
+// Special Because a Chunk snaps to multiples of CHUNK_SIZE in WorldPos.
 public struct ChunkPos {
 	public int x;
 	public int y;

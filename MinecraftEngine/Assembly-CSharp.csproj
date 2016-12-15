@@ -55,6 +55,7 @@
      <Compile Include="Assets\src\extensions\Extensions.cs" />
      <Compile Include="Assets\src\model\Block.cs" />
      <Compile Include="Assets\src\model\BlockFace.cs" />
+     <Compile Include="Assets\src\model\BlockPos.cs" />
      <Compile Include="Assets\src\model\BlockType.cs" />
      <Compile Include="Assets\src\model\Chunk.cs" />
      <Compile Include="Assets\src\model\ChunkPos.cs" />
