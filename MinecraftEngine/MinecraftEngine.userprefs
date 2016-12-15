@@ -1,0 +1,19 @@
+﻿<Properties StartupItem="Assembly-CSharp.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/src/Test.cs">
+    <Files>
+      <File FileName="Assets/src/model/ChunkPos.cs" Line="1" Column="1" />
+      <File FileName="Assets/src/model/WorldPos.cs" Line="1" Column="1" />
+      <File FileName="Assets/src/model/BlockPos.cs" Line="1" Column="1" />
+      <File FileName="Assets/src/model/World.cs" Line="23" Column="19" />
+      <File FileName="Assets/src/model/Chunk.cs" Line="1" Column="1" />
+      <File FileName="Assets/src/model/Block.cs" Line="1" Column="1" />
+      <File FileName="Assets/src/behaviors/system/BlockGenerator.cs" Line="1" Column="1" />
+      <File FileName="Assets/src/Test.cs" Line="1" Column="1" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>

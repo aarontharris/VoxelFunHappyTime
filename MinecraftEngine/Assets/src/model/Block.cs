@@ -16,7 +16,7 @@ public struct Block {
 	private WorldPos wpos;
 	private BlockPos bpos;
 
-	public WorldPos getWorldPosition() {
+	public WorldPos getWorldPos() {
 		return wpos;
 	}
 

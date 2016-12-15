@@ -2,6 +2,9 @@
 
 // A Chunk's position in World Space
 // Special Because a Chunk snaps to multiples of CHUNK_SIZE in WorldPos.
+using UnityEngine;
+
+
 public struct ChunkPos {
 
 	public static void test() {
@@ -70,6 +73,10 @@ public struct ChunkPos {
 		}
 		this.z *= Chunk.CHUNK_SIZE_Z;
 		
+	}
+
+	public Vector3 toVector3() {
+		return new Vector3(x, y, z);
 	}
 
 	public override string ToString() {
