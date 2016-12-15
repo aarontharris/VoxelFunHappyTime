@@ -26,6 +26,6 @@ public struct WorldPos {
 	}
 
 	public override string ToString() {
-		return string.Format("{0},{1},{2}", x, y, z);
+		return string.Format("[WorldPos {0},{1},{2}]", x, y, z);
 	}
 }

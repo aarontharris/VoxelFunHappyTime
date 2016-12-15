@@ -39,7 +39,7 @@ public class BlockGenerator : MonoBehaviour {
 //		Chunk.attainBlock(BlockType.GRANITE, new WorldPos(-7, 0, 0));
 //		Chunk.attainBlock(BlockType.GRANITE, new WorldPos(-5, 0, 0));
 //		Chunk.attainBlock(BlockType.GRANITE, new WorldPos(-3, 0, 0));
-//		Chunk.attainBlock(BlockType.GRANITE, new WorldPos(-1, 0, 0));
+		Chunk.attainBlock(BlockType.GRANITE, new WorldPos(-1, 0, 0));
 		Chunk.attainBlock(BlockType.GRANITE, new WorldPos(0, 1, 0));
 		Chunk.attainBlock(BlockType.GRANITE, new WorldPos(2, 0, 0));
 		Chunk.attainBlock(BlockType.GRANITE, new WorldPos(4, 0, 0));
@@ -64,7 +64,7 @@ public class BlockGenerator : MonoBehaviour {
 		Chunk.attainBlock(BlockType.GRANITE, new WorldPos(48, 1, 0));
 	}
 
-	private int lastSet = -Chunk.CHUNK_SIZE_X;
+	private int lastSet = -Chunk.CHUNK_SIZE_X * 4;
 
 	public void doGenerateNextSet() {
 		try {

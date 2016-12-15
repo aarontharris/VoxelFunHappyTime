@@ -71,9 +71,14 @@ public struct Chunk {
 	// Null when block is not present
 	private Block getBlock(WorldPos pos) {
 		BlockPos bpos = new BlockPos(pos);
-		Block block = blocks[bpos.x, bpos.y, bpos.z];
-		//Block block = blocks[pos.x - getPos().x, pos.y - getPos().y, pos.z - getPos().z];
-		return block;
+		try {
+			Block block = blocks[bpos.x, bpos.y, bpos.z];
+			return block;
+			//Block block = blocks[pos.x - getPos().x, pos.y - getPos().y, pos.z - getPos().z];
+		} catch (Exception e) {
+			Log.d("getBlock( {0} ) Failed.  BlockPos={1}", pos, bpos);	
+			throw e;
+		}
 	}
 
 	private void putBlock(Block block, WorldPos pos) {

@@ -5,6 +5,7 @@ using System.Diagnostics;
 public class Test : MonoBehaviour {
 
 	void Start() {
+		//ChunkPos.test();
 	}
 
 	void test1() {

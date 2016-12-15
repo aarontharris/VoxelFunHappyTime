@@ -15,5 +15,9 @@ public struct BlockPos {
 		this.y = (byte)(pos.y - cpos.y);
 		this.z = (byte)(pos.z - cpos.z);
 	}
+
+	public override string ToString() {
+		return string.Format("[BlockPos {0},{1},{2},{3}]", cpos, x, y, z);
+	}
 }
 
