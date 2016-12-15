@@ -81,7 +81,7 @@ public class BlockGenerator : MonoBehaviour {
 		List<int> triangles = new List<int>();
 		
 		Chunk chunk = World.get().attainChunk(pos);
-		Debug.LogFormat("Generating Chunk {0}, {1}, {2}", chunk.getPos().x, chunk.getPos().y, chunk.getPos().z);
+		Debug.LogFormat("Generating Chunk {0}", chunk.getPos());
 		
 		for (int x = chunk.getStartX(); x < chunk.getEndX(); x++) {
 			for (int y = chunk.getStartY(); y < chunk.getEndY(); y++) {
