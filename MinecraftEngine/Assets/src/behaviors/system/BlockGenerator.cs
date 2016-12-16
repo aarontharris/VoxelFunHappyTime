@@ -91,6 +91,13 @@ public class BlockGenerator : MonoBehaviour {
 			}
 		}
 		
+		Vector2[] uvs = new Vector2[vertices.Count];
+		for (int i = 0; i < uvs.Length; i++) {
+			uvs[i] = new Vector2(vertices[i].x, vertices[i].z);
+		}
+		
+
+		
 		GameObject chunkGameObject = UnityEngine.Object.Instantiate(defaultMesh);
 		chunkGameObject.setPosition(chunk.getPos().toVector3());
 		setChunkGameObjectPos(chunkGameObject, chunk.getPos());
@@ -99,6 +106,7 @@ public class BlockGenerator : MonoBehaviour {
 		Mesh mesh = new Mesh(); // meshFilter.mesh;
 		mesh.vertices = vertices.ToArray();
 		mesh.triangles = triangles.ToArray();
+		mesh.uv = uvs;
 		//mesh.normals = normals.toArray();
 		mesh.RecalculateNormals(); // FIXME: do normals by hand?  Should save some generation time
 		meshFilter.mesh = mesh;
