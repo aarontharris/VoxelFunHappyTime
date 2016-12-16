@@ -29,42 +29,46 @@ public class BlockGenerator : MonoBehaviour {
 			}
 		}
 		
-		Chunk.attainBlock(BlockType.GRANITE, new WorldPos(-32, 1, 0));
-		Chunk.attainBlock(BlockType.GRANITE, new WorldPos(-32, 0, 0));
-		Chunk.attainBlock(BlockType.GRANITE, new WorldPos(-31, 0, 0));
-		Chunk.attainBlock(BlockType.GRANITE, new WorldPos(-17, 0, 0));
-		Chunk.attainBlock(BlockType.GRANITE, new WorldPos(-16, 1, 0));
-		Chunk.attainBlock(BlockType.GRANITE, new WorldPos(-16, 0, 0));
-		Chunk.attainBlock(BlockType.GRANITE, new WorldPos(-15, 0, 0));
-		Chunk.attainBlock(BlockType.GRANITE, new WorldPos(-7, 0, 0));
-		Chunk.attainBlock(BlockType.GRANITE, new WorldPos(-5, 0, 0));
-		Chunk.attainBlock(BlockType.GRANITE, new WorldPos(-3, 0, 0));
-		Chunk.attainBlock(BlockType.GRANITE, new WorldPos(-1, 0, 0));
-		Chunk.attainBlock(BlockType.GRANITE, new WorldPos(0, 1, 0));
-		Chunk.attainBlock(BlockType.GRANITE, new WorldPos(2, 0, 0));
-		Chunk.attainBlock(BlockType.GRANITE, new WorldPos(4, 0, 0));
-		Chunk.attainBlock(BlockType.GRANITE, new WorldPos(6, 0, 0));
-		Chunk.attainBlock(BlockType.GRANITE, new WorldPos(8, 0, 0));
-		Chunk.attainBlock(BlockType.GRANITE, new WorldPos(10, 0, 0));
-		Chunk.attainBlock(BlockType.GRANITE, new WorldPos(12, 0, 0));
-		Chunk.attainBlock(BlockType.GRANITE, new WorldPos(14, 0, 0));
-		Chunk.attainBlock(BlockType.GRANITE, new WorldPos(16, 0, 0));
-		Chunk.attainBlock(BlockType.GRANITE, new WorldPos(16, 1, 0));
-		Chunk.attainBlock(BlockType.GRANITE, new WorldPos(18, 0, 0));
-		Chunk.attainBlock(BlockType.GRANITE, new WorldPos(20, 0, 0));
-		Chunk.attainBlock(BlockType.GRANITE, new WorldPos(22, 0, 0));
-		Chunk.attainBlock(BlockType.GRANITE, new WorldPos(24, 0, 0));
-		Chunk.attainBlock(BlockType.GRANITE, new WorldPos(26, 0, 0));
-		Chunk.attainBlock(BlockType.GRANITE, new WorldPos(28, 0, 0));
-		Chunk.attainBlock(BlockType.GRANITE, new WorldPos(30, 0, 0));
-		Chunk.attainBlock(BlockType.GRANITE, new WorldPos(32, 0, 0));
-		Chunk.attainBlock(BlockType.GRANITE, new WorldPos(32, 1, 0));
+//		Chunk.attainBlock(BlockType.GRANITE, new WorldPos(8, 8, 8));
+//		
+//		Chunk.attainBlock(BlockType.GRANITE, new WorldPos(-32, 1, 0));
+//		Chunk.attainBlock(BlockType.GRANITE, new WorldPos(-32, 0, 0));
+//		Chunk.attainBlock(BlockType.GRANITE, new WorldPos(-31, 0, 0));
+//		Chunk.attainBlock(BlockType.GRANITE, new WorldPos(-17, 0, 0));
+//		Chunk.attainBlock(BlockType.GRANITE, new WorldPos(-16, 1, 0));
+//		Chunk.attainBlock(BlockType.GRANITE, new WorldPos(-16, 0, 0));
+//		Chunk.attainBlock(BlockType.GRANITE, new WorldPos(-15, 0, 0));
+//		Chunk.attainBlock(BlockType.GRANITE, new WorldPos(-7, 0, 0));
+//		Chunk.attainBlock(BlockType.GRANITE, new WorldPos(-5, 0, 0));
+//		Chunk.attainBlock(BlockType.GRANITE, new WorldPos(-3, 0, 0));
+//		Chunk.attainBlock(BlockType.GRANITE, new WorldPos(-1, 0, 0));
+//		Chunk.attainBlock(BlockType.GRANITE, new WorldPos(0, 1, 0));
+//		Chunk.attainBlock(BlockType.GRANITE, new WorldPos(2, 0, 0));
+//		Chunk.attainBlock(BlockType.GRANITE, new WorldPos(4, 0, 0));
+//		Chunk.attainBlock(BlockType.GRANITE, new WorldPos(6, 0, 0));
+//		Chunk.attainBlock(BlockType.GRANITE, new WorldPos(8, 0, 0));
+//		Chunk.attainBlock(BlockType.GRANITE, new WorldPos(10, 0, 0));
+//		Chunk.attainBlock(BlockType.GRANITE, new WorldPos(12, 0, 0));
+//		Chunk.attainBlock(BlockType.GRANITE, new WorldPos(14, 0, 0));
+//		Chunk.attainBlock(BlockType.GRANITE, new WorldPos(16, 0, 0));
+//		Chunk.attainBlock(BlockType.GRANITE, new WorldPos(16, 1, 0));
+//		Chunk.attainBlock(BlockType.GRANITE, new WorldPos(18, 0, 0));
+//		Chunk.attainBlock(BlockType.GRANITE, new WorldPos(20, 0, 0));
+//		Chunk.attainBlock(BlockType.GRANITE, new WorldPos(22, 0, 0));
+//		Chunk.attainBlock(BlockType.GRANITE, new WorldPos(24, 0, 0));
+//		Chunk.attainBlock(BlockType.GRANITE, new WorldPos(26, 0, 0));
+//		Chunk.attainBlock(BlockType.GRANITE, new WorldPos(28, 0, 0));
+//		Chunk.attainBlock(BlockType.GRANITE, new WorldPos(30, 0, 0));
+//		Chunk.attainBlock(BlockType.GRANITE, new WorldPos(32, 0, 0));
+//		Chunk.attainBlock(BlockType.GRANITE, new WorldPos(32, 1, 0));
+//		
+//		Chunk.attainBlock(BlockType.GRANITE, new WorldPos(48, 0, 0));
+//		Chunk.attainBlock(BlockType.GRANITE, new WorldPos(48, 1, 0));
 		
-		Chunk.attainBlock(BlockType.GRANITE, new WorldPos(48, 0, 0));
-		Chunk.attainBlock(BlockType.GRANITE, new WorldPos(48, 1, 0));
+		doGenerateNextSet();
 	}
 
-	private int lastSet = -Chunk.CHUNK_SIZE_X * 4;
+	private int lastSet = -Chunk.CHUNK_SIZE_X;
 
 	public void doGenerateNextSet() {
 		try {
@@ -79,6 +83,7 @@ public class BlockGenerator : MonoBehaviour {
 	private void generateChunkMesh(WorldPos pos) {
 		List<Vector3> vertices = new List<Vector3>();
 		List<int> triangles = new List<int>();
+		List<Vector2> uvs = new List<Vector2>();
 		
 		Chunk chunk = World.get().attainChunk(pos);
 		Debug.LogFormat("Generating Chunk {0}", chunk.getPos());
@@ -86,15 +91,15 @@ public class BlockGenerator : MonoBehaviour {
 		for (int x = chunk.getStartX(); x < chunk.getEndX(); x++) {
 			for (int y = chunk.getStartY(); y < chunk.getEndY(); y++) {
 				for (int z = chunk.getStartZ(); z < chunk.getEndZ(); z++) {
-					renderBlock(vertices, triangles, chunk, new WorldPos(x, y, z));
+					renderBlock(vertices, triangles, uvs, chunk, new WorldPos(x, y, z));
 				}
 			}
 		}
 		
-		Vector2[] uvs = new Vector2[vertices.Count];
-		for (int i = 0; i < uvs.Length; i++) {
-			uvs[i] = new Vector2(vertices[i].x, vertices[i].z);
-		}
+		//Vector2[] uvs = new Vector2[vertices.Count];
+		//for (int i = 0; i < uvs.Length; i++) {
+		//	uvs[i] = new Vector2(vertices[i].x, vertices[i].z);
+		//}
 		
 
 		
@@ -106,7 +111,7 @@ public class BlockGenerator : MonoBehaviour {
 		Mesh mesh = new Mesh(); // meshFilter.mesh;
 		mesh.vertices = vertices.ToArray();
 		mesh.triangles = triangles.ToArray();
-		mesh.uv = uvs;
+		mesh.uv = uvs.ToArray();
 		//mesh.normals = normals.toArray();
 		mesh.RecalculateNormals(); // FIXME: do normals by hand?  Should save some generation time
 		meshFilter.mesh = mesh;
@@ -131,7 +136,7 @@ public class BlockGenerator : MonoBehaviour {
 		return Chunk.attainBlock(block.getWorldPos().facing(blockFace));
 	}
 
-	public void renderBlock(List<Vector3> vertices, List<int> triangles, Chunk chunk, WorldPos pos) {
+	public void renderBlock(List<Vector3> vertices, List<int> triangles, List<Vector2> uvs, Chunk chunk, WorldPos pos) {
 		Block block = Chunk.attainBlock(BlockType.AIR, pos);
 		if (!block.isVisible()) {
 			return;
@@ -149,7 +154,12 @@ public class BlockGenerator : MonoBehaviour {
 			vertices.Add(new Vector3(x, y + 1, z + 1));
 			vertices.Add(new Vector3(x + 1, y + 1, z + 1));
 			vertices.Add(new Vector3(x + 1, y + 1, z));
-
+			
+			uvs.Add(new Vector2(x, y));
+			uvs.Add(new Vector2(x, y + 1));
+			uvs.Add(new Vector2(x + 1, y + 1));
+			uvs.Add(new Vector2(x + 1, y));
+			
 			triangles.Add(vertexIndex + 0);
 			triangles.Add(vertexIndex + 1);
 			triangles.Add(vertexIndex + 2);
@@ -165,6 +175,11 @@ public class BlockGenerator : MonoBehaviour {
 			vertices.Add(new Vector3(x, y, z + 1));
 			vertices.Add(new Vector3(x + 1, y, z + 1));
 			vertices.Add(new Vector3(x + 1, y, z));
+			
+			uvs.Add(new Vector2(x + 1, y));
+			uvs.Add(new Vector2(x + 1, y + 1));
+			uvs.Add(new Vector2(x, y + 1));
+			uvs.Add(new Vector2(x, y));
 
 			triangles.Add(vertexIndex + 0);
 			triangles.Add(vertexIndex + 3);
@@ -181,6 +196,11 @@ public class BlockGenerator : MonoBehaviour {
 			vertices.Add(new Vector3(x, y + 1, z));
 			vertices.Add(new Vector3(x + 1, y + 1, z));
 			vertices.Add(new Vector3(x + 1, y, z));
+			
+			uvs.Add(new Vector2(x, y));
+			uvs.Add(new Vector2(x, y + 1));
+			uvs.Add(new Vector2(x + 1, y + 1));
+			uvs.Add(new Vector2(x + 1, y));
 
 			triangles.Add(vertexIndex + 0);
 			triangles.Add(vertexIndex + 1);
@@ -197,6 +217,11 @@ public class BlockGenerator : MonoBehaviour {
 			vertices.Add(new Vector3(x, y + 1, z + 1));
 			vertices.Add(new Vector3(x + 1, y + 1, z + 1));
 			vertices.Add(new Vector3(x + 1, y, z + 1));
+			
+			uvs.Add(new Vector2(x + 1, y));
+			uvs.Add(new Vector2(x + 1, y + 1));
+			uvs.Add(new Vector2(x, y + 1));
+			uvs.Add(new Vector2(x, y));
 
 			triangles.Add(vertexIndex + 0);
 			triangles.Add(vertexIndex + 3);
@@ -213,6 +238,11 @@ public class BlockGenerator : MonoBehaviour {
 			vertices.Add(new Vector3(x, y, z + 1));
 			vertices.Add(new Vector3(x, y + 1, z + 1));
 			vertices.Add(new Vector3(x, y + 1, z));
+			
+			uvs.Add(new Vector2(x + 1, y));
+			uvs.Add(new Vector2(x, y));
+			uvs.Add(new Vector2(x, y + 1));
+			uvs.Add(new Vector2(x + 1, y + 1));
 
 			triangles.Add(vertexIndex + 0);
 			triangles.Add(vertexIndex + 1);
@@ -229,6 +259,11 @@ public class BlockGenerator : MonoBehaviour {
 			vertices.Add(new Vector3(x + 1, y, z + 1));
 			vertices.Add(new Vector3(x + 1, y + 1, z + 1));
 			vertices.Add(new Vector3(x + 1, y + 1, z));
+			
+			uvs.Add(new Vector2(x, y));
+			uvs.Add(new Vector2(x + 1, y));
+			uvs.Add(new Vector2(x + 1, y + 1));
+			uvs.Add(new Vector2(x, y + 1));
 
 			triangles.Add(vertexIndex + 0);
 			triangles.Add(vertexIndex + 3);
